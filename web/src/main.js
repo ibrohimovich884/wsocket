@@ -1,12 +1,18 @@
-const h1 = document.querySelector( "h1" )
-const button = document.querySelector( "button" )
+import { io } from "socket.io-client"
 
-button.onclick = main
+const username = prompt( "Type username:" )
 
-async function main() {
+const server = io( "http://localhost:3000" )
 
-	const response = await fetch( "http://localhost:3000/message" )
-	const message = await response.text()
+server.send( {
+	type: "NEW_USER",
+	username,
+} )
 
-	h1.textContent = message
-}
+server.on( "message", message => {
+
+	if ( message.type === "NEW_USER" ) {
+
+		console.log( `${ message.username } is online!` )
+	}
+} )
