@@ -30,13 +30,31 @@ io.on( "connection", ( client ) => {
 
 	client.on( "message", message => {
 
-		if ( message.type === "NEW_USER" ) {
+		if ( message.type === "SEND_MESSAGE" ) {
 
 			for ( const c of clients ) {
 
 				c.send( {
-					type: "NEW_USER",
-					username: message.username,
+					type: "NEW_MESSAGE",
+					value: message.value,
+				} )
+			}
+		}
+		else if ( message.type === "TYPING" ) {
+
+			for ( const c of clients ) {
+
+				c.send( {
+					type: "TYPING",
+				} )
+			}
+		}
+		else if ( message.type === "TYPING_COMPLETED" ) {
+
+			for ( const c of clients ) {
+
+				c.send( {
+					type: "TYPING_COMPLETED",
 				} )
 			}
 		}
