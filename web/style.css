@@ -1,0 +1,145 @@
+/* umumiy container */
+.container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ========== REGISTER MENU ========== */
+.register-content {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 400px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.register-content h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.register-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.register-content input {
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.register-content input:focus {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.register-content button {
+    padding: 12px;
+    background: white;
+    color: #2575fc;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.register-content button:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+}
+
+/* ========== TIC-TAC-TOE GRID ========== */
+.tic-content {
+
+    background-color: blue;
+    max-width: 1000px;
+    width: 100%;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.players{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.parent {
+    border-radius: 20%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.rooms {
+    height: 24vh;
+    background-color: rgb(223, 222, 222);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.rooms:hover {
+    background-color: #ddddddc8;
+    transform: scale(1.01);
+}
+
+.div1 {
+    border-top-left-radius: 15px;
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.div2 {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.div3 {
+    grid-area: 1 / 3 / 2 / 4;
+    border-top-right-radius: 15px;
+}
+
+.div4 {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.div5 {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.div6 {
+    grid-area: 2 / 3 / 3 / 4;
+}
+
+.div7 {
+    grid-area: 3 / 1 / 4 / 2;
+    border-bottom-left-radius: 15px;
+}
+
+.div8 {
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+.div9 {
+    grid-area: 3 / 3 / 4 / 4;
+    border-bottom-right-radius: 15px;
+}

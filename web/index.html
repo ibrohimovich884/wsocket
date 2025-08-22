@@ -1,20 +1,53 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebSocket</title>
-    <style>
-      :root {
-        color-scheme: dark only;
-      }
-    </style>
-  </head>
-  <body>
-    <p></p>
-    <ul> </ul>
-    <input type="" name="">
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>Game</title>
+</head>
+
+<body>
+  <main>
+    <section>
+      <div class="container">
+        <div class="register-content">
+          <h1>Register</h1>
+          <form id="register-form">
+            <input id="username" type="text" placeholder="Username" required />
+            <input id="gameId" type="number" placeholder="Game ID" required />
+            <button type="submit">Join Game</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="tic-content">
+          <div class="players">
+            <div class="x-plaer"></div>
+            <div class="timer"></div>
+            <div class="o-plaer"></div>
+          </div>
+          <div class="parent">
+            <div class="rooms div1"></div>
+            <div class="rooms div2"></div>
+            <div class="rooms div3"></div>
+            <div class="rooms div4"></div>
+            <div class="rooms div5"></div>
+            <div class="rooms div6"></div>
+            <div class="rooms div7"></div>
+            <div class="rooms div8"></div>
+            <div class="rooms div9"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+
 </html>

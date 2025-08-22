@@ -1,73 +1,143 @@
-import { io } from "socket.io-client"
+import { io } from "socket.io-client";
 
-const p = document.querySelector( "p" )
-const ul = document.querySelector( "ul" )
-const input = document.querySelector( "input" )
+const socket = io("http://localhost:3000");
 
-main()
+// HTML elementlar
+const rooms = document.querySelectorAll(".rooms");
+const form = document.getElementById("register-form");
+const usernameInput = document.getElementById("username");
+const gameIdInput = document.getElementById("gameId");
 
-function main() {
+let role = null;
+let gameId = null;
 
-	const server = io( "http://localhost:3000" )
+// Royxatdan otish
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const username = usernameInput.value.trim();
+  gameId = gameIdInput.value.trim();
 
-	server.on( "message", message => {
+  if (!username || !gameId) return;
 
-		if ( message.type === "NEW_MESSAGE" ) {
+  socket.emit("joinGame", { username, gameId });
+});
 
-			const li = document.createElement( "li" )
-			li.textContent = message.value
+// Player rolini olish
+socket.on("playerRole", (data) => {
+  role = data.role;
+  alert(`You are ${role}`);
+  console.log(role);
+  
+});
 
-			ul.appendChild( li )
-		}
-		else if ( message.type === "TYPING" ) {
+// Har bir katakka click
+rooms.forEach((cell, index) => {
+  cell.addEventListener("click", () => {
+    if (role && role !== "spectator") {
+      socket.emit("makeMove", { index, gameId });
+    }
+  });
+});
 
-			p.textContent = "Typing..."
-		}
+// Board yangilanishi
+socket.on("updateBoard", ({ board }) => {
+  rooms.forEach((cell, i) => {
+    cell.textContent = board[i] || "";
+  });
+});
 
-		else if ( message.type === "TYPING_COMPLETED" ) {
+// O‘yin tugasa
+socket.on("gameOver", ({ winner }) => {
+  if (winner === "draw") {
+    alert("Draw 🤝");
+  } else {
+    alert(`Winner: ${winner} 🏆`);
+  }
+});
 
-			p.textContent = ""
-		}
-	} )
+// const p = document.querySelector("p")
+// const ul = document.querySelector("ul")
+// const input = document.querySelector("input")
 
-	//
+// main()
 
-	input.onkeyup = event => {
+// function main() {
 
-		if ( event.code === "Enter" ) {
+// 	const server = io("http://localhost:3000")
 
-			server.send( {
-				type: "SEND_MESSAGE",
-				value: input.value,
-			} )
+// 	server.on("message", message => {
+// 		if (message.type === "NEW_MESSAGE") {
+// 			const li = document.createElement("li")
+// 			li.textContent = message.value
 
-			input.value = ""
-		}
+// 			// agar xabar bizniki bo‘lsa
+// 			if (message.isMe) {
+// 				li.classList.add("my-message")
+// 			} else {
+// 				li.classList.add("other-message")
+// 			}
 
-		server.send( {
-			type: "TYPING_COMPLETED",
-		} )
-	}
+// 			ul.appendChild(li)
+// 		}
+// 		else if (message.type === "TYPING") {
+// 			p.textContent = "Typing..."
+// 		}
+// 		else if (message.type === "TYPING_COMPLETED") {
+// 			p.textContent = ""
+// 		}
+// 	})
 
-	input.onkeydown = event => {
 
-		server.send( {
-			type: "TYPING",
-		} )
-	}
-}
+// 	//
+// 	let typingTimeout;
 
-// const username = prompt( "Type username:" )
+// 	input.onkeydown = event => {
+// 		// Har safar yozishda typing yuboriladi
+// 		server.send({
+// 			type: "TYPING",
+// 		});
 
-// server.send( {
-// 	type: "NEW_USER",
-// 	username,
-// } )
+// 		// Oldingi timeoutni tozalaymiz (agar bor bo‘lsa)
+// 		clearTimeout(typingTimeout);
 
-// server.on( "message", message => {
+// 		// 1 soniyadan keyin avtomatik completed yuboriladi
+// 		typingTimeout = setTimeout(() => {
+// 			server.send({
+// 				type: "TYPING_COMPLETED",
+// 			});
+// 		}, 1000);
+// 	};
 
-// 	if ( message.type === "NEW_USER" ) {
+// 	input.onkeyup = event => {
+// 		if (event.code === "Enter") {
+// 			server.send({
+// 				type: "SEND_MESSAGE",
+// 				value: input.value,
+// 			});
 
-// 		console.log( `${ message.username } is online!` )
-// 	}
-// } )
+// 			input.value = "";
+
+// 			// Enter bosilganda ham typing tugagan bo‘lsin
+// 			clearTimeout(typingTimeout);
+// 			server.send({
+// 				type: "TYPING_COMPLETED",
+// 			});
+// 		}
+// 	};
+
+// }
+
+// // const username = prompt( "Type username:" )
+
+// // server.send( {
+// // 	type: "NEW_USER",
+// // 	username,
+// // } )
+
+// // server.on( "message", message => {
+
+// // 	if ( message.type === "NEW_USER" ) {
+
+// // 		console.log( `${ message.username } is online!` )
+// // 	}
+// // } )
