@@ -6,6 +6,11 @@
 }
 
 /* ========== REGISTER MENU ========== */
+
+#register {
+    display: block;
+}
+
 .register-content {
     background: linear-gradient(135deg, #6a11cb, #2575fc);
     color: white;
@@ -61,7 +66,7 @@
 
 /* ========== TIC-TAC-TOE GRID ========== */
 .tic-content {
-
+    display: none;
     background-color: blue;
     max-width: 1000px;
     width: 100%;

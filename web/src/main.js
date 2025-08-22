@@ -10,6 +10,17 @@ const gameIdInput = document.getElementById("gameId");
 const xPlayerBox = document.querySelector(".x-player");
 const oPlayerBox = document.querySelector(".o-player");
 const timerBox = document.querySelector(".timer");
+const register = document.getElementById("register");
+const ticContent = document.querySelector(".tic-content");
+const joinBtn = document.querySelector(".join-btn");
+
+joinBtn.addEventListener("click", () => {
+  if (register.style.display === "block" || register.style.display === "") {
+    register.style.display = "none";   
+    ticContent.style.display = "block";
+  }
+});
+
 
 
 let role = null;
@@ -87,5 +98,5 @@ function startTimer(currentTurn) {
 			clearInterval(timerInterval);
 			timerBox.textContent = "Time out!";
 		}
-	}, 1000);
+	}, 3000);
 }
