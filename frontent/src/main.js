@@ -55,12 +55,15 @@ forgotBtn.onclick = () => {
 
 // Check
 
-const showPass = document.getElementById("show-pass");
+const showPass = document.getElementById("check");
 
 showPass.addEventListener("change", () => {
   if (showPass.checked) {
+    console.log("checked");
+    
     loginPass.type = "text";
   } else {
+    console.log("unchecked");
     loginPass.type = "password";
   }
 });
