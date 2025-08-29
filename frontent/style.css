@@ -205,4 +205,20 @@ a {
 
 .foot-lnk {
     text-align: center;
+    cursor: pointer;
+}
+
+.content-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 200px;
+    gap: 20px;
+}
+
+.content-box a{
+    color: white;
+    text-decoration: underline;
 }

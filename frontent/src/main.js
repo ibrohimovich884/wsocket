@@ -2,6 +2,10 @@ const loginUser = document.getElementById("login-user");
 const loginPass = document.getElementById("login-pass");
 const signinBtn = document.getElementById("signin-btn");
 
+const loginPage = document.getElementById("login-page");
+const forgot = document.getElementById("forgot");
+const forgotBtn = document.querySelector(".foot-lnk");
+
 const signupUser = document.getElementById("signup-user");
 const signupPass = document.getElementById("signup-pass");
 const signupRepeat = document.getElementById("signup-repeat");
@@ -35,7 +39,32 @@ signinBtn.addEventListener("click", async (e) => {
     console.error(err);
     alert("Login failed!");
   }
+  loginUser = "";
+  loginPass = "";
 });
+
+forgotBtn.onclick = () => {
+  if (forgot.style.display === "none") {
+    forgot.style.display = "block";
+    loginPage.style.display = "none";
+  } else {
+    console.log("forgot.style.display !== none");
+
+  }
+}
+
+// Check
+
+const showPass = document.getElementById("show-pass");
+
+showPass.addEventListener("change", () => {
+  if (showPass.checked) {
+    loginPass.type = "text";
+  } else {
+    loginPass.type = "password";
+  }
+});
+
 
 // SIGNUP
 signupBtn.addEventListener("click", async (e) => {
