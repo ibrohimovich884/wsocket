@@ -6,6 +6,8 @@ const loginPage = document.getElementById("login-page");
 const forgot = document.getElementById("forgot");
 const forgotBtn = document.querySelector(".foot-lnk");
 
+const success = document.getElementById("success");
+
 const signupUser = document.getElementById("signup-user");
 const signupPass = document.getElementById("signup-pass");
 const signupRepeat = document.getElementById("signup-repeat");
@@ -34,13 +36,19 @@ signinBtn.addEventListener("click", async (e) => {
     });
 
     const text = await res.text();
-    alert(text);
+    if (text === "Successfull!") {
+      success.style.display = "block";
+      loginPage.style.display = "none";
+    } else {
+      console.log("text != successful!");
+
+    }
   } catch (err) {
     console.error(err);
     alert("Login failed!");
   }
-  loginUser = "";
-  loginPass = "";
+  // loginUser = "";
+  // loginPass = "";
 });
 
 forgotBtn.onclick = () => {
@@ -60,7 +68,7 @@ const showPass = document.getElementById("check");
 showPass.addEventListener("change", () => {
   if (showPass.checked) {
     console.log("checked");
-    
+
     loginPass.type = "text";
   } else {
     console.log("unchecked");
